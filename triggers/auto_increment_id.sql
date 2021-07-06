@@ -82,10 +82,10 @@ FOR EACH ROW EXECUTE PROCEDURE post_auto_increment_id();
 --- Fungsi auto increment comments_id
 CREATE OR REPLACE FUNCTION comments_auto_increment_id() RETURNS TRIGGER AS $comments_increment_id$
 	BEGIN
-		IF ((SELECT count(comments_id) FROM instagram.comments) = 0) THEN
-			NEW.comments_id = 1;
+		IF ((SELECT count(com_id) FROM instagram.comments) = 0) THEN
+			NEW.com_id = 1;
 		ELSE
-			NEW.comments_id = (SELECT comments_id FROM instagram.comments ORDER BY comments_id DESC LIMIT 1)+1;
+			NEW.com_id = (SELECT com_id FROM instagram.comments ORDER BY com_id DESC LIMIT 1)+1;
 		END IF;
 		RETURN NEW;
 	END;
