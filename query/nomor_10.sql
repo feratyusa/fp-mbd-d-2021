@@ -1,8 +1,5 @@
--- (belum)
--- Menghitung total post yang memiliki tag dengan string tertentu
---- Tag mengandung string: D%
-SELECT t.tag_name, COUNT(p.post_id) AS total_tag
-FROM instagram.tags t INNER JOIN instagram.post_tag pt ON t.tag_id = pt.tag_id
-	INNER JOIN instagram.post p ON pt.post_id = p.post_id
-WHERE t.tag_name LIKE 'D%'
-GROUP BY p.post_id, p.post_caption
+-- Menampilkan user following
+SELECT u.user_username, uf.user_username
+FROM instagram.user u INNER JOIN instagram.user_following fu ON u.user_id = fu.user_id
+	INNER JOIN instagram.user uf ON fu.following_id = uf.user_id
+WHERE u.user_username LIKE 'J%' AND uf.user_username LIKE 'H%'
