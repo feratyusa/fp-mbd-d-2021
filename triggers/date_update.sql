@@ -19,14 +19,10 @@ FOR EACH ROW EXECUTE FUNCTION new_date_updated();
 CREATE TRIGGER comments_date_updated BEFORE UPDATE ON instagram.comments
 FOR EACH ROW EXECUTE FUNCTION new_date_updated();
 
---- u/ Tabel Likes
-CREATE TRIGGER likes_date_updated BEFORE UPDATE ON instagram.likes
-FOR EACH ROW EXECUTE FUNCTION new_date_updated();
-
 --- u/ Tabel Story
 CREATE TRIGGER story_date_updated BEFORE UPDATE ON instagram.story
 FOR EACH ROW EXECUTE FUNCTION new_date_updated();
 
---- u/ Tabel Archive Story
-CREATE TRIGGER archive_story_date_updated BEFORE UPDATE ON instagram.archive_story
+--- u/ Tabel Archive
+CREATE TRIGGER archive_story_date_updated BEFORE UPDATE ON instagram.archive
 FOR EACH ROW EXECUTE FUNCTION new_date_updated();

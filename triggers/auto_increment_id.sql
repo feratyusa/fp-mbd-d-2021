@@ -47,22 +47,6 @@ $user_following_increment_id$ LANGUAGE plpgsql;
 CREATE TRIGGER user_following_increment_id BEFORE INSERT ON instagram.user_following
 FOR EACH ROW EXECUTE PROCEDURE user_following_auto_increment_id();
 
---- Fungsi auto increment jp_id
-CREATE OR REPLACE FUNCTION jenis_post_auto_increment_id() RETURNS TRIGGER AS $jenis_post_increment_id$
-	BEGIN
-		IF ((SELECT count(jp_id) FROM instagram.jenis_post) = 0) THEN
-			NEW.jp_id = 1;
-		ELSE
-			NEW.jp_id = (SELECT jp_id FROM instagram.jenis_post ORDER BY jp_id DESC LIMIT 1)+1;
-		END IF;
-		RETURN NEW;
-	END;
-$jenis_post_increment_id$ LANGUAGE plpgsql;
-
---- Trigger auto increment jp_id
-CREATE TRIGGER jenis_post_increment_id BEFORE INSERT ON instagram.jenis_post
-FOR EACH ROW EXECUTE PROCEDURE jenis_post_auto_increment_id();
-
 --- Fungsi auto increment post_id
 CREATE OR REPLACE FUNCTION post_auto_increment_id() RETURNS TRIGGER AS $post_increment_id$
 	BEGIN
@@ -143,7 +127,7 @@ $story_increment_id$ LANGUAGE plpgsql;
 CREATE TRIGGER story_increment_id BEFORE INSERT ON instagram.story
 FOR EACH ROW EXECUTE PROCEDURE story_auto_increment_id();
 
---- Fungsi auto increment archive_story_id
+--- Fungsi auto increment archive
 CREATE OR REPLACE FUNCTION arcs_auto_increment_id() RETURNS TRIGGER AS $arcs_increment_id$
 	BEGIN
 		IF ((SELECT count(arcs_id) FROM instagram.archive_story) = 0) THEN
@@ -155,6 +139,6 @@ CREATE OR REPLACE FUNCTION arcs_auto_increment_id() RETURNS TRIGGER AS $arcs_inc
 	END;
 $arcs_increment_id$ LANGUAGE plpgsql;
 
---- Trigger auto increment archive_story_id
-CREATE TRIGGER arcs_increment_id BEFORE INSERT ON instagram.archive_story
+--- Trigger auto increment archive
+CREATE TRIGGER arcs_increment_id BEFORE INSERT ON instagram.archive
 FOR EACH ROW EXECUTE PROCEDURE arcs_auto_increment_id();
